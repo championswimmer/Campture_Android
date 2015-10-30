@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
-            android:title="Import" />
-        <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item android:id="@+id/nav_manage" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Tools" />
+        <item
+            android:id="@+id/nav_discover"
+            android:icon="@drawable/ic_explore_grey_600_18dp"
+            android:title="Discover" />
+        <item
+            android:id="@+id/nav_recommended"
+            android:icon="@drawable/ic_stars_grey_600_18dp"
+            android:title="Recommended" />
+        <item
+            android:id="@+id/nav_wishlist"
+            android:icon="@drawable/ic_favorite_grey_600_18dp"
+            android:title="Favourites" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
-                android:title="Share" />
-            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
+    <group>
+        <item
+            android:id="@+id/nav_blog"
+            android:icon="@drawable/ic_my_library_books_grey_600_18dp"
+            android:title="Blog" />
+    </group>
+
+    <item>
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@android:drawable/ic_menu_preferences"
+                android:title="Settings" />
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@android:drawable/ic_menu_call"
+                android:title="Contact Us" />
     </item>
 
 </menu>
