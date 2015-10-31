@@ -17,6 +17,15 @@ import com.campture.android.R;
  */
 public class LoaderFragment extends Fragment {
 
+    public static LoaderFragment newInstance() {
+        
+        Bundle args = new Bundle();
+        
+        LoaderFragment fragment = new LoaderFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public LoaderFragment() {
     }
 

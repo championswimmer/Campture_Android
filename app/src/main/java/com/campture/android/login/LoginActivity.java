@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.campture.android.R;
+import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -28,7 +29,14 @@ public class LoginActivity extends AppCompatActivity {
         FragmentManager fragMan = getSupportFragmentManager();
         FragmentTransaction fragTxn = fragMan.beginTransaction();
 
-        fragTxn.replace(R.id.login_container, new LoaderFragment()).commit();
+        ParseUser user = ParseUser.getCurrentUser();
+        if (!(user == null) && user.isNew()) {
+            fragTxn.replace(R.id.login_container, LoaderFragment.newInstance()).commit();
+        } else {
+            fragTxn.replace(R.id.login_container, SigninFragment.newInstance()).commit();
+        }
+
+
 
     }
 

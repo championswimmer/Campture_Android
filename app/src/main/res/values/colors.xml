@@ -4,4 +4,11 @@
     <color name="colorPrimary">#EF6C00</color>
     <color name="colorPrimaryDark">#b75300</color>
     <color name="colorAccent">#407cff</color>
+
+    <!-- Social Colors -->
+    <color name="socialFacebook">#3b5998</color>
+    <color name="socialTwitter">#00aced</color>
+    <color name="socialGoogleplus">#dd4b39</color>
+    <color name="socialLinkedin">#007bb5</color>
+
 </resources>
