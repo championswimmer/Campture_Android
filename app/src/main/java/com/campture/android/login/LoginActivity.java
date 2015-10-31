@@ -22,6 +22,7 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.SignUpCallback;
 
 import org.json.JSONObject;
 
@@ -42,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         ParseUser user = ParseUser.getCurrentUser();
-        if (!(user == null) && user.isNew()) {
+        if ((!(user == null)) && !user.isNew()) {
             getSupportFragmentManager().beginTransaction().replace(R.id.login_container, LoaderFragment.newInstance()).commit();
         } else {
             getSupportFragmentManager().beginTransaction().replace(R.id.login_container, SigninFragment.newInstance()).commit();
@@ -65,11 +66,13 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Oops ! Could not log you in!", Toast.LENGTH_SHORT).show();
                 } else if (user.isNew()) {
                     Log.d(TAG, "User signed up and logged in through Facebook!");
-                    GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    GraphRequest fbRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                         @Override
                         public void onCompleted(JSONObject fbUser, GraphResponse response) {
-                            user.put("name", fbUser.optString("name"));
-                            user.saveInBackground(new SaveCallback() {
+                            ParseUser parseUser = ParseUser.getCurrentUser();
+                            parseUser.put("name", fbUser.optString("name"));
+                            parseUser.put("email", fbUser.optString("email"));
+                            parseUser.saveInBackground(new SaveCallback() {
                                 @Override
                                 public void done(ParseException e) {
                                     // User signup done
@@ -78,6 +81,10 @@ public class LoginActivity extends AppCompatActivity {
                             });
                         }
                     });
+                    Bundle parameters = new Bundle();
+                    parameters.putString("fields", "id,name,email");
+                    fbRequest.setParameters(parameters);
+                    fbRequest.executeAsync();
                 } else {
                     Log.d(TAG, "User logged in through Facebook!");
                     proceedToApp();
@@ -88,6 +95,44 @@ public class LoginActivity extends AppCompatActivity {
 
     public void proceedToApp () {
         getSupportFragmentManager().beginTransaction().replace(R.id.login_container, LoaderFragment.newInstance()).commit();
+    }
+
+    public void proceedToSignup () {
+        getSupportFragmentManager().beginTransaction().replace(R.id.login_container, SignupFragment.newInstance()).commit();
+    }
+
+    public void handleEmailSignup(String email, String password, String name) {
+        ParseUser parseUser = new ParseUser();
+        parseUser.put("username", email);
+        parseUser.put("email", email);
+        parseUser.put("password", password);
+        parseUser.put("name", name);
+
+        parseUser.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    proceedToApp();
+                } else {
+                    Toast.makeText(LoginActivity.this, "There was an error signing up", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, e.getMessage());
+                }
+            }
+        });
+    }
+
+    public void handleEmailSignin(String email, String password) {
+        ParseUser.logInInBackground(email, password, new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                if (e != null) {
+                    Toast.makeText(LoginActivity.this, "Error in logging in", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, e.getMessage());
+                } else if (user.isAuthenticated()) {
+                    proceedToApp();
+                }
+            }
+        });
     }
 
 

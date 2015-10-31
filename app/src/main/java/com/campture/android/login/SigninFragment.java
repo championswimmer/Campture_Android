@@ -3,6 +3,7 @@ package com.campture.android.login;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.campture.android.R;
 public class SigninFragment extends Fragment  implements View.OnClickListener{
 
     Button btnFbSignin, btnTwitterSignin;
+    AppCompatTextView gotoSignup;
 
     public static SigninFragment newInstance() {
         
@@ -37,9 +39,11 @@ public class SigninFragment extends Fragment  implements View.OnClickListener{
         View rootView = inflater.inflate(R.layout.fragment_signin, container, false);
         btnFbSignin = (Button) rootView.findViewById(R.id.button_facebook_signin);
         btnTwitterSignin = (Button) rootView.findViewById(R.id.button_twitter_signin);
+        gotoSignup = (AppCompatTextView) rootView.findViewById(R.id.goto_signup_email);
 
         btnFbSignin.setOnClickListener(this);
         btnTwitterSignin.setOnClickListener(this);
+        gotoSignup.setOnClickListener(this);
 
         return rootView;
     }
@@ -53,6 +57,9 @@ public class SigninFragment extends Fragment  implements View.OnClickListener{
                 break;
             case R.id.button_twitter_signin:
                 //Handle Twitter login
+                break;
+            case R.id.goto_signup_email:
+                ((LoginActivity) getActivity()).proceedToSignup();
                 break;
         }
     }

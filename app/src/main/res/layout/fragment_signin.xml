@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"/>
 
         <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/goto_signup_email"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/white"
             android:gravity="center"
