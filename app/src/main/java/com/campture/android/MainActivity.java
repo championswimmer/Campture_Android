@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.campture.android.blog.BlogFragment;
+import com.campture.android.tours.TourDiscoverFragment;
 import com.facebook.appevents.AppEventsLogger;
 import com.parse.ParseUser;
 
@@ -96,13 +98,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_discover) {
-            // Handle the camera action
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, TourDiscoverFragment.newInstance()).commit();
         } else if (id == R.id.nav_recommended) {
 
         } else if (id == R.id.nav_wishlist) {
 
         } else if (id == R.id.nav_blog) {
-
+            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, BlogFragment.newInstance()).commit();
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_contact_us) {
