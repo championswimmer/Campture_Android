@@ -12,14 +12,8 @@ import java.util.Collection;
 /**
  * Created by championswimmer on 31/10/15.
  */
-public class LoginUtils {
-    public class Facebook {
-        public final Collection<String> LOGIN_PERMISSIONS = Arrays.asList(
-                PUBLIC_PROFILE,
-                EMAIL,
-                USER_FRIENDS
-        );
-
+public  class LoginUtils {
+    public static class Facebook {
         public static final String PUBLIC_PROFILE = "public_profile";
         public static final String USER_FRIENDS = "user_friends";
         public static final String EMAIL = "email";
@@ -46,6 +40,14 @@ public class LoginUtils {
         public static final String PUBLISH_PAGES = "publish_pages";
         public static final String PUBLISH_ACTIONS = "publish_actions";
         public static final String RSVP_EVENT = "rsvp_event";
+
+        public static final Collection<String> LOGIN_PERMISSIONS = Arrays.asList(
+                PUBLIC_PROFILE,
+                EMAIL,
+                USER_FRIENDS
+        );
+
+
 
     }
 }
