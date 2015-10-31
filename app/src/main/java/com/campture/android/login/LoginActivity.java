@@ -1,5 +1,6 @@
 package com.campture.android.login;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.campture.android.R;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -36,8 +38,13 @@ public class LoginActivity extends AppCompatActivity {
             fragTxn.replace(R.id.login_container, SigninFragment.newInstance()).commit();
         }
 
-
-
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
+    }
+
 
 }
