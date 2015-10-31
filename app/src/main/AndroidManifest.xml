@@ -24,8 +24,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:icon="@mipmap/ic_launcher"
             android:name=".login.LoginActivity"
-            android:label="@string/title_activity_login"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +37,9 @@
         </activity>
 
         <!-- Facebook SDK stuff -->
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
 
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
